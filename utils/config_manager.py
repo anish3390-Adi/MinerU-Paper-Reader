@@ -19,7 +19,8 @@ class ConfigManager:
     METHOD_AWARE_BACKENDS = {"pipeline", "hybrid-http-client", "hybrid-auto-engine"}
 
     def __init__(self, config_file="config.yaml"):
-        self.config_file = Path(config_file)
+        self.config_file = Path(config_file).resolve()
+        self.project_root = self.config_file.parent
         self.config = {}
         self.dotenv_vars = {}
         self.env_vars = {}
@@ -180,7 +181,7 @@ class ConfigManager:
         raw_value = self.get(key)
         if raw_value is None:
             raise ConfigError(f"缺少路径配置: {key}")
-        return Path(raw_value).expanduser()
+        return self._resolve_path(raw_value)
 
     def get_translation_config(self):
         return self.get("translation", {})
@@ -259,7 +260,7 @@ class ConfigManager:
 
     def get_translation_project_dir(self):
         raw_value = self.get_env("MD_TRANSLATOR_DIR") or self.get("translation.project_dir")
-        return Path(raw_value).expanduser() if raw_value else None
+        return self._resolve_path(raw_value) if raw_value else None
 
     def get_translation_port(self):
         raw_value = self.get_env("MD_TRANSLATOR_PORT") or self.get("translation.port", 3000)
@@ -290,6 +291,12 @@ class ConfigManager:
             return str(command_path.resolve())
 
         return shutil.which(command_name)
+
+    def _resolve_path(self, raw_value):
+        path = Path(raw_value).expanduser()
+        if not path.is_absolute():
+            path = self.project_root / path
+        return path.resolve()
 
     def get_runtime_summary(self):
         translation_config = self.get_translation_config()
