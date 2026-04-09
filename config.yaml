@@ -1,0 +1,50 @@
+tools:
+  mineru_mode: "cloud_api"
+  mineru_api_base_url: "https://mineru.net/api/v4"
+  mineru_model_version: "vlm"
+  mineru_language: "en"
+  mineru_enable_table: true
+  mineru_enable_formula: true
+  mineru_is_ocr: false
+  mineru_poll_interval: 5
+  mineru: "mineru"
+  mineru_backend: "pipeline"
+  mineru_parse_method: "auto"
+  mineru_lang: "en"
+  mineru_server_url: ""
+  mineru_api_url: ""
+  mineru_timeout: 1800
+  node: "node"
+
+translation:
+  request_timeout: 1800
+  output_filename: "zh.md"
+  api_key_env: "DEEPSEEK_API_KEY"
+  base_url_env: "DEEPSEEK_BASE_URL"
+  model_env: "DEEPSEEK_MODEL"
+  api_base_url: "https://api.deepseek.com/v1"
+  model: "deepseek-chat"
+  method: "llm"
+  api_url: "http://127.0.0.1:3000/api/translate"
+  host: "127.0.0.1"
+  port: 3000
+  auto_start: true
+  start_timeout: 30
+  retry_count: 3
+  retry_timeout: 60
+  project_dir: "./external/md-translator"
+  standalone_entry: ".next/standalone/server.js"
+  source_language: "en"
+  target_language: "zh"
+  markdown_options:
+    translateFrontmatter: false
+    translateMultilineCode: false
+    translateLatex: false
+    translateLinkText: true
+
+paths:
+  temp_dir: "./temp"
+  runs_dir: "./temp/runs"
+
+app:
+  max_file_size: 50
