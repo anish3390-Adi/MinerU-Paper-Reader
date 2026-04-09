@@ -103,13 +103,76 @@ DEEPSEEK_API_KEY=your_deepseek_api_key
 MINERU_API_KEY=your_mineru_api_key
 ```
 
+## MinerU 模式
+
+项目支持两种 MinerU 模式，通过 `.env` 里的 `MINERU_MODE` 切换。
+
+### 1. 官方云 API 模式
+
+适合这些情况：
+
+- 不想在本机部署 MinerU 模型
+- 机器性能一般，希望更稳地完成 PDF 提取
+- 只想填 API key 后直接使用
+
+配置示例：
+
+```env
+MINERU_MODE=cloud_api
+MINERU_API_KEY=your_mineru_api_key
+MINERU_API_BASE_URL=https://mineru.net/api/v4
+MINERU_MODEL_VERSION=vlm
+MINERU_LANGUAGE=en
+MINERU_ENABLE_TABLE=true
+MINERU_ENABLE_FORMULA=true
+MINERU_IS_OCR=false
+MINERU_POLL_INTERVAL=5
+```
+
+### 2. 本地 CLI 模式
+
+适合这些情况：
+
+- 已经安装好了本地 `mineru`
+- 希望完全本地执行 PDF 提取
+- 需要继续使用自己的 MinerU backend / server 配置
+
+配置示例：
+
+```env
+MINERU_MODE=cli
+MINERU_BIN=mineru
+MINERU_BACKEND=pipeline
+MINERU_SERVER_URL=
+MINERU_API_URL=
+MINERU_METHOD=auto
+MINERU_LANG=en
+MINERU_MODEL_SOURCE=
+```
+
+如果使用 CLI 模式，必须保证 `mineru` 命令可直接执行，或者在 `MINERU_BIN` 中填写绝对路径。
+
 ## 启动项目
 
 ### Windows
 
+双击启动：
+
 ```text
 start.bat
 ```
+
+命令行启动：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start.ps1
+```
+
+Windows 启动脚本会自动执行这些步骤：
+
+- 检查 `python`、`node`、`corepack`
+- 如果 `external/md-translator/.next/standalone/server.js` 不存在，则自动构建 `md-translator`
+- 启动 Streamlit 页面
 
 ### macOS
 
@@ -135,6 +198,15 @@ start.command
 
 ```bash
 python -m streamlit run app.py --server.headless=true
+```
+
+如果是首次手动启动，需要先确保：
+
+```bash
+cd external/md-translator
+corepack yarn install
+LOCAL_API_SERVER=true corepack yarn build
+cd ../..
 ```
 
 启动后访问：
