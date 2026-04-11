@@ -2,8 +2,9 @@
 
 import type { TranslationServiceInfo } from "./types";
 
-export const DEFAULT_SYS_PROMPT = "You are a professional translator. Respond only with the content, either translated or rewritten. Do not add explanations, comments, or any extra text.";
-export const DEFAULT_USER_PROMPT = "Please respect the original meaning, maintain the original format, and rewrite the following content in ${targetLanguage}.\n\n${content}";
+export const DEFAULT_SYS_PROMPT = "You are a professional translator. Respond only with the translated content. Do not translate the instructions themselves. Do not add explanations, comments, wrappers, or any extra text.";
+export const DEFAULT_USER_PROMPT =
+  "Translate only the text enclosed in <content>...</content> from ${sourceLanguage} into ${targetLanguage}. Preserve the original meaning and formatting. Do not translate these instructions.\n\n<content>\n${content}\n</content>";
 
 export const TRANSLATION_SERVICES: TranslationServiceInfo[] = [
   { value: "gtxFreeAPI", label: "GTX API (Free)" },
